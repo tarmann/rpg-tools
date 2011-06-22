@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head>
+  <title>Old Dragon - Perícias</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" type="text/javascript"></script>
+  <script>
+  $(function(){
+    $("input").change(function(){ calculaDificuldade(); })
+    $("select").change(function(){ calculaDificuldade(); })
+    calculaDificuldade();
+    
+    function calculaDificuldade(){
+      var teste = parseInt($("#atributo").val()) + parseInt($("#treinamento").val()) + parseInt($("#dificuldade").val());
+      var porcentagem = teste * 5;
+      $("#teste").html( teste );
+      
+      
+      if(porcentagem >= 100) $("#porcentagem").html( 'Sucesso Automático' );
+      else if(porcentagem <= 5) $("#porcentagem").html( 'Impossível' );
+      else $("#porcentagem").html( porcentagem + ' %' );
+    }
+  })
+  </script>
+  <style>
+  label{ width: 100px; display: block; float: left; }
+  </style>
+</head>
+<body>
+	<h1>Sistema de Perícias "Bom em" com rolagens para sistemas Old School</h1>
+	
+	<h2>Progressão de perícias</h2>
+	
+	<p>O sistema utilizado é baseado no The Good-At System de <a href="http://www.swordsandwizardry.com/forum/memberlist.php?mode=viewprofile&u=993">bohemian</a> com pequenas modificações na progressão, e sendo acrescentado o sistema de rolagem de dados.</p>
+	
+	<p>No primeiro nível o jogador escolhe um verbo que será algo em que o personagem é bom (ex.: nadar), podendo escolher outro aceitando um "mal em..." escolhido pelo mestre.</p>
+	
+	<p>A cada três níveis o jogador pode escolher outro verbo para ser "bom em" OU se livrar do "mal em" OU evoluir um "bom em" para "muito bom em".</p>
+	
+	<p><strong>Testando a perícia:</strong> Para testar a perícia o jogador deve rolar 1d20 e comparar com a habilidade correspondente somada aos modificadores (treinamento e dificuldade). Caso o valor seja menor, ele passou no teste.</p>
+	
+	<h2>Calculadora de Dificuldades</h2>
+	
+	<div>
+      <label>Atributo:</label>
+      <input type="text" id="atributo" value="13" />
+  </div>
+  
+  <div>
+    <label>Treinamento:</label>
+    <select id="treinamento">
+        <option value="0">Normal</option>
+        <option value="-10">Mal em... (-10)</option>
+        <option value="-5">Sem treinamento (-5)</option>
+        <option value="3">Bom em... (+3)</option>
+        <option value="6">Muito bom em... (+6)</option>
+    </select>
+  </div>
+  
+  <div>
+    <label>Dificuldade:</label>
+    <select id="dificuldade">
+        <option value="0">Normal (+0)</option>
+        <option value="5">Fácil (+5)</option>
+        <option value="-5">Difícil (-5)</option>
+        <option value="-10">Épico (-10)</option>
+    </select>    
+  </div>
+  
+  <div>
+    <label>Teste:</label>
+    <span id="teste"></span>
+  </div>
+  
+  <div>
+    <label>Porcentagem:</label>
+    <span id="porcentagem"></span>
+  </div>    
+  
+  
+  <p>Exemplo: Os aventureiros estão correndo e precisam saltar sobre um desfiladeiro de quase 2 metros. Horvath possui <strong>15 de força</strong> e não possui um treinamento especial em atletismo, porém esse salto não requer treinamento específico <strong>(Treinamento Normal)</strong>. Porém, ele só vê o desfiladeiro pouco antes do salto, o que torna ele <strong>difícil (-5)</strong>. Para passar no teste ele precisa de 10 ou menos em uma rolagem de d20.
+</body>
+</html>
